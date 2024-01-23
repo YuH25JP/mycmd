@@ -40,25 +40,17 @@ fn main() {
 
         Commands::Ls { path } => {
             let work_dir = current_dir().unwrap(); // working directory
-            let target_dir = path.unwrap_or(work_dir); // if path option is not given, set target to working directory
-
-            // println!("List files and directories under {:?}", target_dir);
-
-            if target_dir.is_dir() {
-
-            } else {
-                // if the target_dir is not a directory (cf. a file, a symlink, etc...)
-                eprintln!("Error");
-            }
+            let target_dir = path.unwrap_or(work_dir); // if path option is not given, set working directory to target_dir
 
             match fs::read_dir(target_dir) {
                 Ok(entries) => {
                     for entry in entries {
                         match entry {
-                            Ok(entry) => println!("{:?}", entry.file_name()),
+                            Ok(entry) => print!("{:?}  ", entry.file_name()),
                             Err(e) => eprintln!("error: {}", e),
                         }
                     }
+                    println!();
                 },
                 Err(e) => eprintln!("error: {}", e),
             }
