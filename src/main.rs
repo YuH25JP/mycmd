@@ -34,7 +34,7 @@ fn main() {
     match args.command {
         Commands::Pwd => {
             println!("{}", current_dir().unwrap().to_str().unwrap());
-        },
+        }
 
         Commands::Ls(ls_args) => {
             ls_args.run();
